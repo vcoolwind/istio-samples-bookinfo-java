@@ -1,0 +1,26 @@
+server:
+  port: 7000
+spring:
+  application:
+    name: user-client
+management: #actuator配置
+    port: 7000
+    security:
+      enabled: false  #关闭安全
+logging:
+  level:
+    root: INFO
+info: #actuator的/info 信息
+  app:
+    name: "@project.artifactId@"
+    encoding: '@project.build.sourceEncoding@'
+    java:
+      source: '@java.version@'
+      target: '@java.version@'
+eureka:
+  client:
+    service-url:
+      #defaultZone: http://eureka:123@eureka1:8761/eureka/,http://eureka:123@eureka2:8762/eureka/
+      defaultZone: http://admin:admin@127.0.0.1:8761/eureka/
+  #instance:
+  #  prefer-ip-address: true

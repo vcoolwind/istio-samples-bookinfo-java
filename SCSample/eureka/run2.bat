@@ -1,0 +1,1 @@
+java -jar target/discovery-eureka-ka-docker.jar --spring.profiles.active=eureka2

@@ -1,0 +1,1 @@
+java -jar target/provider-user-1.0-SNAPSHOT.jar

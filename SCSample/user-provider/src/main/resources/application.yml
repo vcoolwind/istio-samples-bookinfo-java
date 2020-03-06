@@ -1,0 +1,46 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: user-provider
+  jpa:
+    generate-ddl: false
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  datasource:
+    platform: h2
+    schema: classpath:schema.sql
+    data: classpath:data.sql
+    sql-script-encoding: utf-8
+  http:
+    multipart:
+      max-file-size: 10MB    #默认限制是1M
+      max-request-size: 100MB  #默认限制是10M
+management: #actuator配置
+    port: 8000
+    security:
+      enabled: false  #关闭安全
+logging:
+  level:
+    root: INFO
+    org.hibernate: INFO
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
+info: #actuator的/info 信息
+  app:
+    name: "@project.artifactId@"
+    encoding: '@project.build.sourceEncoding@'
+    java:
+      source: '@java.version@'
+      target: '@java.version@'
+eureka:
+  client:
+    service-url:
+      #defaultZone: http://eureka:123@eureka1:8761/eureka/,http://eureka:123@eureka2:8762/eureka/
+      defaultZone: http://admin:admin@127.0.0.1:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    metadata-map:
+      addr: shenzhen china
+      tel: 0755-10001

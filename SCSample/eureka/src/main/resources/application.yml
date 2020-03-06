@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: discovery-eureka-server
+  #注意，在最新版本Greenwich中，口令不是配置security.user.name和security.user.password属性中，它已被废弃不推荐使用，而是配置在Spring中(spring.security.user.name和spring.security.user.password)。
+  security:
+    user:
+      name: admin
+      password: admin
+server:
+  port: 8761
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@${eureka.instance.hostname}:${server.port}/eureka/
+#---
+#spring:
+#  profiles: eureka1
+#server:
+#  port: 8761
+#eureka:
+#  instance:
+#    hostname: eureka-server
+#  client:
+#    #声明自己是个服务端
+#    #registerWithEureka: false    #false表示不向注册中心注册自己
+#    #fetchRegistry: false         #false表示自己就是注册中心，职责是维护实例，不参加检索
+#    serviceUrl:                  #设置eureka server的交互地址，即对外暴露的地址
+#      defaultZone: http://eureka:123@eureka2:8762/eureka/
+#  server:
+#    enable-self-preservation: false
+#---
+#spring:
+#  profiles: eureka2
+#server:
+#  port: 8762
+#eureka:
+#  instance:
+#    hostname: eureka2
+#  client:
+#    #声明自己是个服务端
+#    #registerWithEureka: false    #false表示不向注册中心注册自己
+#    #fetchRegistry: false         #false表示自己就是注册中心，职责是维护实例，不参加检索
+#    serviceUrl:                  #设置eureka server的交互地址，即对外暴露的地址
+#      defaultZone: http://eureka:123@eureka1:8761/eureka/
+#  server:
+#    enable-self-preservation: false
