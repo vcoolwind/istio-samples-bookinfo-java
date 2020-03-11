@@ -1,5 +1,0 @@
-D:\idea_workspace\istio-samples-bookinfo-java\review\src\main\java\com\stone\dailypractice\bookinfo\review\config\FeginInterceptor.java
-D:\idea_workspace\istio-samples-bookinfo-java\review\src\main\java\com\stone\dailypractice\bookinfo\review\MainApplication.java
-D:\idea_workspace\istio-samples-bookinfo-java\review\src\main\java\com\stone\dailypractice\bookinfo\review\controller\ViewController.java
-D:\idea_workspace\istio-samples-bookinfo-java\review\src\main\java\com\stone\dailypractice\bookinfo\review\feignclient\RatingsClient.java
-D:\idea_workspace\istio-samples-bookinfo-java\review\src\main\java\com\stone\dailypractice\bookinfo\review\feignclient\RatingsClientFallback.java
