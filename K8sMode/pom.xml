@@ -9,7 +9,9 @@
     <version>1.0</version>
     <packaging>pom</packaging>
     <modules>
-        <module>review</module>
+        <module>reviews</module>
+        <module>ratings</module>
+        <module>details</module>
     </modules>
 
     <parent>
@@ -23,6 +25,8 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
         <maven.proguard.version>2.0.14</maven.proguard.version>
         <proguard.version>6.1.0</proguard.version>
         <fabric8.maven.plugin.version>4.3.1</fabric8.maven.plugin.version>
@@ -58,6 +62,11 @@
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-all</artifactId>
                 <version>4.5.7</version>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.12</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

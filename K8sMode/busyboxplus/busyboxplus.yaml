@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: busyboxplus
+  labels:
+    app: busyboxplus
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: busyboxplus
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: busyboxplus
+        version: v1
+    spec:
+      serviceAccountName: super-sa
+      containers:
+        - name: busyboxplus
+          image: busyboxplus:1.0
+          command:
+            - sleep
+            - "3600"
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: tmp
+          emptyDir: {}

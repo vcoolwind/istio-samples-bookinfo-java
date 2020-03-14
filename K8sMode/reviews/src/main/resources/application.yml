@@ -1,0 +1,30 @@
+server:
+  port: 8102
+
+spring:
+  application:
+    name: reviews
+  datasource:
+    url: jdbc:h2:mem:reviews;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+    jpa:
+      properties:
+        hibernate:
+          dialect: org.hibernate.dialect.PostgreSQLDialect
+  cloud:
+    kubernetes:
+      ribbon:
+        enabled: true
+        mode: SERVICE
+        cluster-domain: cluster.local
+
+
+ratings:
+  enabled: true
+  servicename: ratings
+
+feign:
+  hystrix:
+    enabled: true

@@ -33,6 +33,7 @@ import logging
 import requests
 import os
 import asyncio
+import traceback
 
 # These two lines enable debugging at httplib level (requests->urllib3->http.client)
 # You will see the REQUEST, including HEADERS and DATA, and RESPONSE with HEADERS but without DATA.
@@ -42,7 +43,9 @@ try:
 except ImportError:
     # Python 2
     import httplib as http_client
-http_client.HTTPConnection.debuglevel = 1
+#http_client.HTTPConnection.debuglevel = 1
+#http_client.HTTPConnection.debuglevel = 0
+
 
 app = Flask(__name__)
 logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
@@ -254,7 +257,7 @@ def floodReviews(product_id, headers):
 @app.route('/productpage')
 @trace()
 def front():
-    product_id = 0  # TODO: replace default value
+    product_id = "2099a055-1e21-46ef-825e-9e0de93554ea"  # TODO: replace default value
     headers = getForwardHeaders(request)
     user = session.get('user', '')
     product = getProduct(product_id)
@@ -264,6 +267,12 @@ def front():
         floodReviews(product_id, headers)
 
     reviewsStatus, reviews = getProductReviews(product_id, headers)
+    logging.info("detailsStatus: %s" % (detailsStatus))
+    logging.info("reviewsStatus: %s" % (reviewsStatus))
+    logging.info("product: %s" % (product))
+    logging.info("details: %s" % (details))
+    logging.info("reviews: %s" % (reviews))
+
     return render_template(
         'productpage.html',
         detailsStatus=detailsStatus,
@@ -308,26 +317,38 @@ def ratingsRoute(product_id):
 def getProducts():
     return [
         {
-            'id': 0,
-            'title': 'The Comedy of Errors',
-            'descriptionHtml': '<a href="https://en.wikipedia.org/wiki/The_Comedy_of_Errors">Wikipedia Summary</a>: The Comedy of Errors is one of <b>William Shakespeare\'s</b> early plays. It is his shortest and one of his most farcical comedies, with a major part of the humour coming from slapstick and mistaken identity, in addition to puns and word play.'
+            "product_id": "2099a055-1e21-46ef-825e-9e0de93554ea",
+            "title": "Paraxial Light Beams with Angular Momentum",
+            "descriptionHtml": "Fundamental and applied concepts concerning the ability of light beams to carry a certain mechanical angular momentum (AM) with respect to the propagation axis are reviewed and discussed in this book."
+        },
+        {
+            "product_id": "a071c269-369c-4f79-be03-6a41f27d6b5f",
+            "title": "Lawful Interception, see ISBN 978-1-4668-5384-3",
+            "descriptionHtml": "An all-new tale of Marcus Yallow, the hero of the bestselling novels Little Brother and Homeland."
         }
     ]
 
 
 def getProduct(product_id):
     products = getProducts()
-    if product_id + 1 > len(products):
-        return None
-    else:
-        return products[product_id]
+    for product in products:
+        productStr = str(product).replace("\'", "\"")
+        #logging.info("product json: %s" % (productStr))
+        pjson = json.loads(productStr)
+        if product_id == pjson["product_id"] :
+            return product
+    return None
 
 
 def getProductDetails(product_id, headers):
     try:
-        url = details['name'] + "/" + details['endpoint'] + "/" + str(product_id)
+        url = details['name'] + "/" + details['endpoint'] + "/" + product_id
+        logging.info("getProductDetails request url: %s" % (url))
         res = requests.get(url, headers=headers, timeout=3.0)
+        logging.info("getProductDetails response : %s" % (res.json()))
+
     except BaseException:
+        logging.error(traceback.format_exc())
         res = None
     if res and res.status_code == 200:
         return 200, res.json()
@@ -341,9 +362,11 @@ def getProductReviews(product_id, headers):
     # TODO: Figure out how to achieve the same effect using Envoy retries/timeouts
     for _ in range(2):
         try:
-            url = reviews['name'] + "/" + reviews['endpoint'] + "/" + str(product_id)
+            url = reviews['name'] + "/" + reviews['endpoint'] + "/" + product_id
+            logging.info("request url: %s" % (url))
             res = requests.get(url, headers=headers, timeout=3.0)
         except BaseException:
+            logging.error(traceback.format_exc())
             res = None
         if res and res.status_code == 200:
             return 200, res.json()
@@ -353,9 +376,11 @@ def getProductReviews(product_id, headers):
 
 def getProductRatings(product_id, headers):
     try:
-        url = ratings['name'] + "/" + ratings['endpoint'] + "/" + str(product_id)
+        url = ratings['name'] + "/" + ratings['endpoint'] + "/" + product_id
+        logging.info("request url: %s" % (url))
         res = requests.get(url, headers=headers, timeout=3.0)
     except BaseException:
+        logging.error(traceback.format_exc())
         res = None
     if res and res.status_code == 200:
         return 200, res.json()

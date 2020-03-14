@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: details
+server:
+  port: 8103

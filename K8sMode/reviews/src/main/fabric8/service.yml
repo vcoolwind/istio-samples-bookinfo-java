@@ -1,0 +1,7 @@
+spec:
+  ports:
+    - protocol: TCP
+      port: 9080
+      targetPort: 8102
+      nodePort: 30002
+  type: NodePort
