@@ -41,7 +41,7 @@ spec:
       serviceAccountName: super-sa
       containers:
         - name: productpage
-          image: productpage:1.0
+          image: productpage:1.0.0
           imagePullPolicy: IfNotPresent
           env:
             - name: SERVICES_DOMAIN

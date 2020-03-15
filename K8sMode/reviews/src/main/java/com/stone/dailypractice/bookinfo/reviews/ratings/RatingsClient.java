@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import java.util.UUID;
 
 
-// @FeignClient(name = "${ratings.servicename}" ,fallback = RatingsClientFallback.class)
+//@FeignClient(name = "${ratings.servicename}" ,fallback = RatingsClientFallback.class)
 @FeignClient(name = "${ratings.servicename}", fallbackFactory = RatingsClientFallbackFactory.class)
 public interface RatingsClient {
 

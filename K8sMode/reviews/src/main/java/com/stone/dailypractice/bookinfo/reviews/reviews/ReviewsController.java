@@ -2,6 +2,7 @@ package com.stone.dailypractice.bookinfo.reviews.reviews;
 
 import com.stone.dailypractice.bookinfo.reviews.ratings.Rating;
 import com.stone.dailypractice.bookinfo.reviews.ratings.RatingsClient;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +12,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@Slf4j
 public class ReviewsController {
 
     @Value("${ratings.enabled}")
@@ -21,6 +23,7 @@ public class ReviewsController {
     private RatingsClient ratingsClient;
 
     public ReviewsController(ReviewsRepository reviewRepository, RatingsClient ratingsClient) {
+        log.info("ReviewsController init ,ReviewsRepository = {}, RatingsClient= {}", reviewRepository, ratingsClient);
         this.reviewRepository = reviewRepository;
         this.ratingsClient = ratingsClient;
     }
@@ -33,6 +36,7 @@ public class ReviewsController {
 
     @GetMapping(value = "/reviews/{productId}")
     public ReviewDto getReviewsByProductId(@PathVariable UUID productId) {
+        log.info("getReviewsByProductId by productId:{}", productId);
         ReviewDto reviewDto = new ReviewDto();
         reviewDto.setProductId(productId);
 
@@ -41,7 +45,7 @@ public class ReviewsController {
 
         for (Review review : reviews) {
             if (this.ratingsEnabled) {
-                Rating rating = ratingsClient.getRating(productId,review.getReviewer());
+                Rating rating = ratingsClient.getRating(productId, review.getReviewer());
                 review.setRating(rating);
             }
         }
