@@ -8,24 +8,22 @@
 >
 
 
-minikube start --image-mirror-country=cn   --image-repository=registry.cn-hangzhou.aliyuncs.com/google_containers --vm-driver=none  && \
-eval $(minikube docker-env) \
-docker load < /home/stone/soft/backup/busybox.tar  && \
-docker load < /home/stone/soft/backup/jdk-centos-1.5.tar && \
-docker load < /home/stone/soft/backup/python.tar && \
-docker images|grep none|grep -v "grep"|awk '{print " rmi " $3}'|xargs docker  
+> minikube start --image-mirror-country=cn   --image-repository=registry.cn-hangzhou.aliyuncs.com/google_containers --vm-driver=none  && \
+> eval $(minikube docker-env) \
+> docker load < /home/stone/soft/backup/busybox.tar  && \
+> docker load < /home/stone/soft/backup/jdk-centos-1.5.tar && \
+> docker load < /home/stone/soft/backup/python.tar && \
+> docker images|grep none|grep -v "grep"|awk '{print " rmi " $3}'|xargs docker  
 
 
-#!/bin/bash
-minikube start --image-mirror-country=cn   --image-repository=registry.cn-hangzhou.aliyuncs.com/google_containers --vm-driver=none  
-eval $(minikube docker-env) 
+> #!/bin/bash
+> minikube start --image-mirror-country=cn   --image-repository=registry.cn-hangzhou.aliyuncs.com/google_containers --vm-driver=none  
+> eval $(minikube docker-env) 
 
-kubectl delete deploy --all -n default
-kubectl delete pod --all --force --grace-period=0 -n default
-docker images|grep none|grep -v "grep"|awk '{print " rmi " $3 " -f"}'|xargs docker  
+> kubectl delete deploy --all -n default
+> kubectl delete pod --all --force --grace-period=0 -n default
+> docker images|grep none|grep -v "grep"|awk '{print " rmi " $3 " -f"}'|xargs docker  
 
-docker load < /home/stone/soft/backup/busybox.tar  
-docker load < /home/stone/soft/backup/jdk-centos-1.5.tar 
-docker load < /home/stone/soft/backup/python.tar
-
-
+> docker load < /home/stone/soft/backup/busybox.tar  
+> docker load < /home/stone/soft/backup/jdk-centos-1.5.tar 
+> docker load < /home/stone/soft/backup/python.tar
