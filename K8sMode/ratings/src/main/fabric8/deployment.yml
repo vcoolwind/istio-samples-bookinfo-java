@@ -1,5 +1,5 @@
 spec:
-  replicas: 2
+  replicas: 1
   template:
     spec:
       #volumes:
@@ -19,3 +19,17 @@ spec:
       #            apiVersion: v1
       #            fieldPath: metadata.namespace
       serviceAccount: super-sa
+      containers:
+        - env:
+            - name: DATASOURCE_PLATFORM
+              value: pg
+            - name: DATASOURCE_URL
+              value: "jdbc:postgresql://192.168.92.1:5432/ratingdb"
+            - name: DATASOURCE_USERNAME
+              value: "bookinfo"
+            - name: DATASOURCE_PASSWORD
+              value: "bookinfo"
+            - name: DATASOURCE_DRIVER
+              value: "org.postgresql.Driver"
+            - name: DDL_AUTO
+              value: "none"

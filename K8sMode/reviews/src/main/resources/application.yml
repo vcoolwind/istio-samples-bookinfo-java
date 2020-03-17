@@ -1,30 +1,49 @@
 server:
   port: 8102
+ratings:
+  enabled: true
+  servicename: ratings
+feign:
+  hystrix:
+    enabled: true
+
+
 
 spring:
   application:
     name: reviews
   datasource:
-    url: jdbc:h2:mem:reviews;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
-    jpa:
-      properties:
-        hibernate:
-          dialect: org.hibernate.dialect.PostgreSQLDialect
+    #the best way is in rating project
+    #platform: h2
+    #url: jdbc:h2:mem:reviews;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL
+    #username: sa
+    #password:
+    #driver-class-name: org.h2.Driver
+    platform: pg
+    url: jdbc:postgresql://192.168.92.x:5432/reviewdb
+    username: bookinfox
+    password: bookinfox
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    show-sql: true
+    # Hibernate additional native properties to set on the JPA provider.
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        current_session_context_class: thread
+        format_sql: true
+        # Fix Postgres JPA Error (Method org.postgresql.jdbc.PgConnection.createClob() is not yet implemented).
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    hibernate:
+      # DDL mode. This is actually a shortcut for the "hibernate.hbm2ddl.auto" property. Defaults to "create-drop" when using an embedded database and no schema manager was detected. Otherwise, defaults to "none".
+      # create-drop  update
+      ddl-auto: none
   cloud:
     kubernetes:
       ribbon:
         enabled: true
         mode: SERVICE
         cluster-domain: cluster.local
-
-
-ratings:
-  enabled: true
-  servicename: ratings
-
-feign:
-  hystrix:
-    enabled: true

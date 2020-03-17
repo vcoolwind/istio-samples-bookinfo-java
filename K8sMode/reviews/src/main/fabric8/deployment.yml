@@ -18,4 +18,13 @@ spec:
       #          fieldRef:
       #            apiVersion: v1
       #            fieldPath: metadata.namespace
+      containers:
+      - env:
+          #the best way is in rating project
+          - name: spring.datasource.url
+            value: "jdbc:postgresql://192.168.92.1:5432/reviewdb"
+          - name: spring.datasource.username
+            value: "bookinfo"
+          - name: spring.datasource.password
+            value: "bookinfo"
       serviceAccount: super-sa

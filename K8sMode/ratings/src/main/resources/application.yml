@@ -2,12 +2,19 @@ spring:
   application:
     name: ratings
   datasource:
-  url: jdbc:h2:mem:products;DB_CLOSE_ON_EXIT=FALSE
-  username: sa
-  password:
-  driver-class-name: org.h2.Driver
+    #platform: h2
+    #url: jdbc:h2:mem:reviews;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL
+    #username: sa
+    #password:
+    #driver-class-name: org.h2.Driver
+    platform: ${DATASOURCE_PLATFORM:h2}
+    url: ${DATASOURCE_URL:jdbc:h2:mem:reviews;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL}
+    username: ${DATASOURCE_USERNAME:sa}
+    password: ${DATASOURCE_PASSWORD:}
+    driver-class-name: ${DATASOURCE_DRIVER:org.h2.Driver}
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: ${DDL_AUTO:create}
+    show-sql: true
 server:
   port: 8101
