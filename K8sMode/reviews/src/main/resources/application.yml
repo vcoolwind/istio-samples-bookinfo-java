@@ -1,12 +1,17 @@
 server:
   port: 8102
+
 ratings:
   enabled: true
   servicename: ratings
+
+configReload:
+  enabled: true
+  servicename: configreload
+
 feign:
   hystrix:
     enabled: true
-
 
 
 spring:
@@ -47,3 +52,9 @@ spring:
         enabled: true
         mode: SERVICE
         cluster-domain: cluster.local
+  http:
+    log-request-details: true
+
+logging:
+  level:
+    web: debug

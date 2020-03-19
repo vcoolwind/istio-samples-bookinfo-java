@@ -1,3 +1,5 @@
+metadata:
+  namespace: mybookinfo
 spec:
   replicas: 1
   template:
@@ -27,4 +29,4 @@ spec:
             value: "bookinfo"
           - name: spring.datasource.password
             value: "bookinfo"
-      serviceAccount: super-sa
+      serviceAccount: mybookinfo-sa

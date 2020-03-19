@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: config-reload-test
+server:
+  port: 8104

@@ -1,7 +1,10 @@
+metadata:
+  namespace: mybookinfo
 spec:
   ports:
-    - protocol: TCP
+    - name: http
+      protocol: TCP
       port: 9080
       targetPort: 8101
-      nodePort: 30001
-  type: NodePort
+      #nodePort: 30001
+  #type: NodePort

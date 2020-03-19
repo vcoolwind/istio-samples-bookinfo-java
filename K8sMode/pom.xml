@@ -12,6 +12,7 @@
         <module>reviews</module>
         <module>ratings</module>
         <module>details</module>
+        <module>configreload</module>
     </modules>
 
     <parent>

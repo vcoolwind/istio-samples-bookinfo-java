@@ -1,6 +1,9 @@
 #!/bin/bash
 
-projects=( ratings reviews details productpage )
+kubectl delete namespaces  mybookinfo
+kubectl apply -f mybookinfo-k8s.yml
+
+projects=( ratings configreload reviews details productpage )
 
 for project in "${projects[@]}"
 do
@@ -8,4 +11,4 @@ do
   ./build.sh
   cd ..
 done
-kubectl get deploy,svc,pod -o wide
+kubectl get deploy,svc,pod -o wide -n mybookinfo

@@ -154,6 +154,15 @@
       {% endif %}
       {% endif %}
     </div>
-  </div>
+
+    <div class="col-md-6">
+      {% if reviewsStatus == 200: %}
+      <h4 class="text-center text-primary">Book Reviews confing ifno</h4>
+      <blockquote>
+        <p>{{ reviews.remoteConfig.requestThreshold }}</p>
+        <p>{{ reviews.remoteConfig.logLevel }}</p>
+      </blockquote>
+      {% endif %}
+    </div>
 </div>
 {% endblock %}

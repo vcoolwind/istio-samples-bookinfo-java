@@ -1,8 +1,10 @@
 package com.stone.dailypractice.bookinfo.reviews.reviews;
 
+import com.stone.dailypractice.bookinfo.reviews.configreload.ConfigReloadClient;
 import com.stone.dailypractice.bookinfo.reviews.ratings.Rating;
 import com.stone.dailypractice.bookinfo.reviews.ratings.RatingsClient;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,9 +20,15 @@ public class ReviewsController {
     @Value("${ratings.enabled}")
     private Boolean ratingsEnabled;
 
+    @Value("${configReload.enabled}")
+    private Boolean configReloadEnabled;
+
     private ReviewsRepository reviewRepository;
 
     private RatingsClient ratingsClient;
+
+    @Autowired
+    private ConfigReloadClient configReloadClient;
 
     public ReviewsController(ReviewsRepository reviewRepository, RatingsClient ratingsClient) {
         log.info("ReviewsController init ,ReviewsRepository = {}, RatingsClient= {}", reviewRepository, ratingsClient);
@@ -48,6 +56,9 @@ public class ReviewsController {
                 Rating rating = ratingsClient.getRating(productId, review.getReviewer());
                 review.setRating(rating);
             }
+        }
+        if(this.configReloadEnabled){
+            reviewDto.setRemoteConfig(configReloadClient.getRemoteConfig());
         }
 
         return reviewDto;

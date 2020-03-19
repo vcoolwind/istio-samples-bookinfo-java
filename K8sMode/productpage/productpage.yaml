@@ -2,16 +2,23 @@
 # Productpage services
 ##################################################################################################
 apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: mybookinfo-sa
+  namespace: mybookinfo
+---
+apiVersion: v1
 kind: Service
 metadata:
   name: productpage
+  namespace: mybookinfo
   labels:
     app: productpage
     service: productpage
 spec:
   ports:
-    - port: 9080
-      name: http
+    - name: http
+      port: 9080
       targetPort: 9080
       # 固定端口数值，必须是配置文件范围内
       nodePort: 30000
@@ -23,6 +30,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: productpage
+  namespace: mybookinfo
   labels:
     app: productpage
     version: v1
@@ -38,14 +46,14 @@ spec:
         app: productpage
         version: v1
     spec:
-      serviceAccountName: super-sa
+      serviceAccountName: mybookinfo-sa
       containers:
         - name: productpage
           image: productpage:1.0.0
           imagePullPolicy: IfNotPresent
           env:
             - name: SERVICES_DOMAIN
-              value: "default.svc"
+              value: "mybookinfo.svc"
           ports:
             - containerPort: 9080
           volumeMounts:

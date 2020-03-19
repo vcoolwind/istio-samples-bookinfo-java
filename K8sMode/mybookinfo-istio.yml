@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: ServiceEntry
+metadata:
+  name: pg-external
+spec:
+  hosts:
+    - 192.168.92.1
+  addresses:
+    - 192.168.92.1/32
+  ports:
+    - name: tcp
+      number: 5432
+      protocol: tcp
+  location: MESH_EXTERNAL
+---
+# refer to fix healthy check
+#https://github.com/istio/istio/blob/release-1.5/mixer/testdata/config/prometheus.yaml

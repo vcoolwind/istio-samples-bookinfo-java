@@ -1,0 +1,7 @@
+metadata:
+  namespace: mybookinfo
+spec:
+  replicas: 1
+  template:
+    spec:
+      serviceAccount: mybookinfo-sa
