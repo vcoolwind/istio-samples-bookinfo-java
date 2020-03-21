@@ -8,7 +8,7 @@ spring:
     #password:
     #driver-class-name: org.h2.Driver
     platform: ${DATASOURCE_PLATFORM:h2}
-    url: ${DATASOURCE_URL:jdbc:h2:mem:reviews;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL}
+    url: ${DATASOURCE_URL:jdbc:h2:mem:ratings;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL}
     username: ${DATASOURCE_USERNAME:sa}
     password: ${DATASOURCE_PASSWORD:}
     driver-class-name: ${DATASOURCE_DRIVER:org.h2.Driver}

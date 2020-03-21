@@ -2,9 +2,10 @@ apiVersion: networking.istio.io/v1alpha3
 kind: ServiceEntry
 metadata:
   name: pg-external
+  namespace: mybookinfo
 spec:
   hosts:
-    - 192.168.92.1
+    -  pg-external
   addresses:
     - 192.168.92.1/32
   ports:

@@ -21,12 +21,17 @@ spec:
       #            apiVersion: v1
       #            fieldPath: metadata.namespace
       containers:
-      - env:
-          #the best way is in rating project
-          - name: spring.datasource.url
-            value: "jdbc:postgresql://192.168.92.1:5432/reviewdb"
-          - name: spring.datasource.username
-            value: "bookinfo"
-          - name: spring.datasource.password
-            value: "bookinfo"
+        - env:
+            - name: DATASOURCE_PLATFORM
+              value: pg
+            - name: DATASOURCE_URL
+              value: "jdbc:postgresql://192.168.92.1:5432/reviewdb"
+            - name: DATASOURCE_USERNAME
+              value: "bookinfo"
+            - name: DATASOURCE_PASSWORD
+              value: "bookinfo"
+            - name: DATASOURCE_DRIVER
+              value: "org.postgresql.Driver"
+            - name: DDL_AUTO
+              value: "none"
       serviceAccount: mybookinfo-sa

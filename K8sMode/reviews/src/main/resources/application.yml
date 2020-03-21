@@ -24,11 +24,11 @@ spring:
     #username: sa
     #password:
     #driver-class-name: org.h2.Driver
-    platform: pg
-    url: jdbc:postgresql://192.168.92.x:5432/reviewdb
-    username: bookinfox
-    password: bookinfox
-    driver-class-name: org.postgresql.Driver
+    platform: ${DATASOURCE_PLATFORM:h2}
+    url: ${DATASOURCE_URL:jdbc:h2:mem:reviews;DB_CLOSE_ON_EXIT=FALSE;MODE=PostgreSQL}
+    username: ${DATASOURCE_USERNAME:sa}
+    password: ${DATASOURCE_PASSWORD:}
+    driver-class-name: ${DATASOURCE_DRIVER:org.h2.Driver}
 
   jpa:
     show-sql: true
@@ -45,7 +45,7 @@ spring:
     hibernate:
       # DDL mode. This is actually a shortcut for the "hibernate.hbm2ddl.auto" property. Defaults to "create-drop" when using an embedded database and no schema manager was detected. Otherwise, defaults to "none".
       # create-drop  update
-      ddl-auto: none
+      ddl-auto: ${DDL_AUTO:create}
   cloud:
     kubernetes:
       ribbon:

@@ -1,6 +1,8 @@
 package com.stone.dailypractice.bookinfo.details;
 
 
+import lombok.Data;
+
 /*
         'id' => id,
         'author': book['authors'][0],
@@ -12,11 +14,6 @@ package com.stone.dailypractice.bookinfo.details;
         'ISBN-10' => isbn10,
         'ISBN-13' => isbn13
  */
-
-import lombok.Data;
-
-import javax.persistence.Transient;
-
 @Data
 public class Detail {
     private String id;
@@ -30,7 +27,6 @@ public class Detail {
     private String title;
     private String description;
 
-    @Transient
     private String error="";
 
 }
