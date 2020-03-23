@@ -55,10 +55,15 @@ public class ReviewsController {
             if (this.ratingsEnabled) {
                 Rating rating = ratingsClient.getRating(productId, review.getReviewer());
                 review.setRating(rating);
+            }else{
+                log.info("ratings is not enabled");
             }
         }
+
         if(this.configReloadEnabled){
             reviewDto.setRemoteConfig(configReloadClient.getRemoteConfig());
+        }else{
+            log.info("configReload is not enabled");
         }
 
         return reviewDto;

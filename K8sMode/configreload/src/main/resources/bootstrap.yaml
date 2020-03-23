@@ -7,10 +7,10 @@ spring:
         period: 5000
       config:
         name: ${spring.application.name}
-        namespace: default
+        namespace: mybookinfo
         sources:
-          # Spring Cloud Kubernetes looks up a ConfigMap named my-another-config in namespace default-namespace
-          - name: my-another-config
+          # Spring Cloud Kubernetes looks up a ConfigMap named my-configmap  in namespace mybookinfo-namespace
+          - name: my-configmap
           # Spring Cloud Kubernetes looks up a ConfigMap named  ${spring.application.name} in whatever namespace n2
           #- namespace: n2
           # Spring Cloud Kubernetes looks up a ConfigMap named c3 in namespace n3

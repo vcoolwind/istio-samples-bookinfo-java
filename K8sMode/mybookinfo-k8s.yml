@@ -11,15 +11,40 @@ metadata:
   name: mybookinfo-sa
   namespace: mybookinfo
 ---
+kind: Role
 apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
 metadata:
-  name: cluster-admin-mybookinfo-sa
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cluster-admin
+  namespace: mybookinfo
+  name: sc-k8s-reader
+rules:
+  - apiGroups: ["", "extensions", "apps"]
+    resources: ["configmaps", "pods", "services", "endpoints", "secrets"]
+    verbs: ["get", "list", "watch"]
+
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name:  sc-k8s-reader-binding
+  namespace: mybookinfo
 subjects:
   - kind: ServiceAccount
     name: mybookinfo-sa
-    namespace: mybookinfo
+    apiGroup: ""
+roleRef:
+  kind: Role
+  name: sc-k8s-reader
+  apiGroup: ""
+#---
+#apiVersion: rbac.authorization.k8s.io/v1
+#kind: ClusterRoleBinding
+#metadata:
+#  name: cluster-admin-mybookinfo-sa
+#roleRef:
+#  apiGroup: rbac.authorization.k8s.io
+#  kind: ClusterRole
+#  name: cluster-admin
+#subjects:
+#  - kind: ServiceAccount
+#    name: mybookinfo-sa
+#    namespace: mybookinfo
