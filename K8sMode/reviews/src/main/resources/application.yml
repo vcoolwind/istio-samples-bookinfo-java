@@ -52,9 +52,15 @@ spring:
         enabled: true
         mode: SERVICE
         cluster-domain: cluster.local
+        #find service in all namespaces,more than one service with same name will not work
+        all-namespaces: true
+      discovery:
+        all-namespaces: true
+
   http:
-    log-request-details: true
+    log-request-details: false
 
 logging:
   level:
-    web: debug
+    web: info
+

@@ -1,5 +1,5 @@
 metadata:
-  namespace: mybookinfo
+  namespace: otherns
 spec:
   replicas: 1
   template:

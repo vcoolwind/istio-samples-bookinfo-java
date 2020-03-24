@@ -7,7 +7,7 @@ spring:
         period: 5000
       config:
         name: ${spring.application.name}
-        namespace: mybookinfo
+        namespace: otherns
         sources:
           # Spring Cloud Kubernetes looks up a ConfigMap named my-configmap  in namespace mybookinfo-namespace
           - name: my-configmap

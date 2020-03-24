@@ -1,5 +1,5 @@
 spring:
   application:
-    name: config-reload-test
+    name: config-reload
 server:
   port: 8104

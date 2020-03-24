@@ -6,6 +6,7 @@ import com.stone.dailypractice.bookinfo.reviews.ratings.RatingsClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,6 +30,10 @@ public class ReviewsController {
 
     @Autowired
     private ConfigReloadClient configReloadClient;
+
+    @Autowired
+    private DiscoveryClient discoveryClient;
+//    KubernetesServicesServerList
 
     public ReviewsController(ReviewsRepository reviewRepository, RatingsClient ratingsClient) {
         log.info("ReviewsController init ,ReviewsRepository = {}, RatingsClient= {}", reviewRepository, ratingsClient);
@@ -55,14 +60,14 @@ public class ReviewsController {
             if (this.ratingsEnabled) {
                 Rating rating = ratingsClient.getRating(productId, review.getReviewer());
                 review.setRating(rating);
-            }else{
+            } else {
                 log.info("ratings is not enabled");
             }
         }
 
-        if(this.configReloadEnabled){
+        if (this.configReloadEnabled) {
             reviewDto.setRemoteConfig(configReloadClient.getRemoteConfig());
-        }else{
+        } else {
             log.info("configReload is not enabled");
         }
 
