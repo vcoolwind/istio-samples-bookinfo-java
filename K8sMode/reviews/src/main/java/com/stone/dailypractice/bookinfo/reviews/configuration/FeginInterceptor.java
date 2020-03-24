@@ -1,4 +1,4 @@
-package com.stone.dailypractice.bookinfo.reviews.config;
+package com.stone.dailypractice.bookinfo.reviews.configuration;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;

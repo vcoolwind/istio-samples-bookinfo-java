@@ -1,4 +1,4 @@
-package com.stone.dailypractice.bookinfo.reviews.config;
+package com.stone.dailypractice.bookinfo.reviews.configuration;
 
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.openfeign.EnableFeignClients;
