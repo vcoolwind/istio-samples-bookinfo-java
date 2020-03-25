@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: config-reload
   cloud:
     kubernetes:
       reload:
@@ -9,10 +11,13 @@ spring:
         name: ${spring.application.name}
         namespace: otherns
         sources:
-          # Spring Cloud Kubernetes looks up a ConfigMap named my-configmap  in namespace mybookinfo-namespace
+          # Spring Cloud Kubernetes looks up a ConfigMap named my-configmap  in namespace otherns
+          - name: ${spring.application.name}
           - name: my-configmap
           # Spring Cloud Kubernetes looks up a ConfigMap named  ${spring.application.name} in whatever namespace n2
           #- namespace: n2
           # Spring Cloud Kubernetes looks up a ConfigMap named c3 in namespace n3
           #- namespace: n3
           #  name: c3
+      secrets:
+        enableApi: true

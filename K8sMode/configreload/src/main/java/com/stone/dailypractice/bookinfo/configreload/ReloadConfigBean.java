@@ -14,9 +14,13 @@ public class ReloadConfigBean {
     @Autowired
     private DummyConfig dummyConfig;
 
-    @Scheduled(fixedDelay = 5000)
+    @Autowired
+    private SecretConfig secretConfig;
+
+    @Scheduled(fixedDelay = 15000)
     public void showConfig() {
         log.info("The value of myConfig is: " + this.myConfig);
+        log.info("The value of secretConfig is: " + this.secretConfig);
         log.info("The other message is: " + this.dummyConfig.getMessage());
     }
 }
