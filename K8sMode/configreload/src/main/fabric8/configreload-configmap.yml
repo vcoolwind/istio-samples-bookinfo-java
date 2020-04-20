@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: config-reload
-  namespace: otherns
-data:
-  application.properties: |-
-    logging.level.web=info
-    server.port=8104

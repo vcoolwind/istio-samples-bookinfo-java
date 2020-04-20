@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: config-reload
+logging:
+  level:
+    web: info
+server:
+  port: 8104

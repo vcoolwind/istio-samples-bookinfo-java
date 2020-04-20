@@ -1,6 +1,4 @@
 spring:
-  application:
-    name: config-reload
   cloud:
     kubernetes:
       reload:
@@ -11,9 +9,11 @@ spring:
         name: ${spring.application.name}
         namespace: otherns
         sources:
-          # Spring Cloud Kubernetes looks up a ConfigMap named my-configmap  in namespace otherns
-          - name: ${spring.application.name}
-          - name: my-configmap
+          # load config-reload configmap by default,app restart when configmap changed,so disabled it .
+
+          #- name: ${spring.application.name}
+          # Spring Cloud Kubernetes looks up a ConfigMap named dynamic-configmap  in namespace otherns
+          - name: dynamic-configmap
           # Spring Cloud Kubernetes looks up a ConfigMap named  ${spring.application.name} in whatever namespace n2
           #- namespace: n2
           # Spring Cloud Kubernetes looks up a ConfigMap named c3 in namespace n3

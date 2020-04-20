@@ -5,22 +5,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+/**
+ * show runtime info
+ */
 @Slf4j
 @Component
-public class ReloadConfigBean {
+public class ReloadConfigStatus {
     @Autowired
-    private MyConfig myConfig;
+    private DynamicConfig dynamicConfig;
 
     @Autowired
     private DummyConfig dummyConfig;
 
     @Autowired
-    private SecretConfig secretConfig;
+    private MongoDBConfig mongoDBConfig;
 
     @Scheduled(fixedDelay = 15000)
     public void showConfig() {
-        log.info("The value of myConfig is: " + this.myConfig);
-        log.info("The value of secretConfig is: " + this.secretConfig);
+        log.info("The value of myConfig is: " + this.dynamicConfig);
+        log.info("The value of secretConfig is: " + this.mongoDBConfig);
         log.info("The other message is: " + this.dummyConfig.getMessage());
     }
 }

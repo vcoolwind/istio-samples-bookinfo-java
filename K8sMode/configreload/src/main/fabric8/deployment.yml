@@ -5,3 +5,15 @@ spec:
   template:
     spec:
       serviceAccount: mybookinfo-sa
+      containers:
+        - env:
+            - name: MONGODB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: spring.data.mongodb.username
+            - name: MONGODB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongodb-secret
+                  key: spring.data.mongodb.password

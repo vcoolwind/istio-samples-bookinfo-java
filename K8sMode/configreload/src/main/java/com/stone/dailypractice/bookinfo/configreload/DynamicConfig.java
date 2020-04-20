@@ -16,37 +16,23 @@
 
 package com.stone.dailypractice.bookinfo.configreload;
 
+import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * use config info from configmap,this info can be changed runtime.
+ * 1.create k8s configmap [dynamic-configmap.yml]
+ * 2.set load cm on bootstap  [bootstrap.yaml]
+ * 3.change configmap on runtime, config will be updated and show config [ReloadConfigStatus.java]
+ */
 @Configuration(proxyBeanMethods = false)
 @ConfigurationProperties(prefix = "dynamic")
-public class MyConfig {
+@Data
+public class DynamicConfig {
 	private int requestThreshold = 80;
 
-	private String logLevel = "error";
+	private String alertLevel = "error";
 
-	public int getRequestThreshold() {
-		return requestThreshold;
-	}
 
-	public void setRequestThreshold(int requestThreshold) {
-		this.requestThreshold = requestThreshold;
-	}
-
-	public String getLogLevel() {
-		return logLevel;
-	}
-
-	public void setLogLevel(String logLevel) {
-		this.logLevel = logLevel;
-	}
-
-	@Override
-	public String toString() {
-		return "ConfigBean{" +
-				"requestThreshold=" + requestThreshold +
-				", logLevel='" + logLevel + '\'' +
-				'}';
-	}
 }

@@ -14,4 +14,4 @@ sleep 10
 #kubectl get pod |grep ${project} |head -n 1|awk '{print $1}'|xargs kubectl logs -f
 kubectl get pod  -n otherns |grep ${project} |head -n 1|awk '{print "kubectl logs -n otherns -f " $1}'|xargs echo
 sleep 2
-echo '-------------build '${project}' over-------------------'
+echo '-------------build '${project}' over------------------'
