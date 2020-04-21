@@ -12,7 +12,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Transient;
-import java.util.List;
 import java.util.UUID;
 
 @TypeDefs({@TypeDef(name = "uuid-pgh2", typeClass = PostgresH2UUIDType.class, defaultForType = UUID.class)})

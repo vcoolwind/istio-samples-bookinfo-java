@@ -1,4 +1,4 @@
-package com.stone.dailypractice.bookinfo.reviews.configuration;
+package com.stone.dailypractice.bookinfo.common.mesh;
 
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
@@ -12,21 +12,24 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * support service mesh
+ * should be public model.
+ */
 @Configuration
 @Slf4j
 public class FeginInterceptor implements RequestInterceptor {
-
     // HTTP headers to propagate for distributed tracing are documented at
     // https://istio.io/docs/tasks/telemetry/distributed-tracing/overview/#trace-context-propagation
     private final static String[] HEADERS_TO_PROAGATE = {"x-request-id", "x-b3-traceid", "x-b3-spanid", "x-b3-sampled", "x-b3-flags",
             "x-ot-span-context", "x-datadog-trace-id", "x-datadog-parent-id", "x-datadog-sampled", "end-user", "user-agent"};
 
-
     @Override
     public void apply(RequestTemplate requestTemplate) {
         Map<String, String> headers = getHeaders(getHttpServletRequest());
-        for (String headerName : headers.keySet()) {
-            requestTemplate.header(headerName, getHeaders(getHttpServletRequest()).get(headerName));
+        for (Map.Entry<String, String> entry : headers.entrySet()) {
+            //log.info("{} ---> {}", entry.getKey(), entry.getValue());
+            requestTemplate.header(entry.getKey(), entry.getValue());
         }
     }
 

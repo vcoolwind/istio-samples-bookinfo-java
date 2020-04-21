@@ -19,6 +19,7 @@ package com.stone.dailypractice.bookinfo.configreload;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 /**
  * use config info from configmap,this info can be changed runtime.
@@ -28,11 +29,32 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration(proxyBeanMethods = false)
 @ConfigurationProperties(prefix = "dynamic")
-@Data
 public class DynamicConfig {
 	private int requestThreshold = 80;
 
 	private String alertLevel = "error";
 
+	public int getRequestThreshold() {
+		return requestThreshold;
+	}
 
+	public void setRequestThreshold(int requestThreshold) {
+		this.requestThreshold = requestThreshold;
+	}
+
+	public String getAlertLevel() {
+		return alertLevel;
+	}
+
+	public void setAlertLevel(String alertLevel) {
+		this.alertLevel = alertLevel;
+	}
+
+	@Override
+	public String toString() {
+		return "DynamicConfig{" +
+				"requestThreshold=" + requestThreshold +
+				", alertLevel='" + alertLevel + '\'' +
+				'}';
+	}
 }

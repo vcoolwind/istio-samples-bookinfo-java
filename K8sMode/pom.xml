@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.stone.dailypractice</groupId>
-    <artifactId>bookinfo-k8s</artifactId>
+    <groupId>com.stone.dailypractice.bookinfo</groupId>
+    <artifactId>bookinfo</artifactId>
     <version>1.0</version>
     <packaging>pom</packaging>
     <modules>
@@ -13,6 +13,7 @@
         <module>ratings</module>
         <module>details</module>
         <module>configreload</module>
+        <module>common</module>
     </modules>
 
     <parent>
@@ -22,6 +23,7 @@
     </parent>
 
     <properties>
+        <bookinfo-k8s.version>1.0</bookinfo-k8s.version>
         <spring-boot.version>2.2.5.RELEASE</spring-boot.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -47,6 +49,12 @@
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <artifactId>common</artifactId>
+                <groupId>com.stone.dailypractice.bookinfo</groupId>
+                <version>${bookinfo-k8s.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>

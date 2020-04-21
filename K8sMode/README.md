@@ -27,3 +27,9 @@
 > docker load < /home/stone/soft/backup/busybox.tar  
 > docker load < /home/stone/soft/backup/jdk-centos-1.5.tar 
 > docker load < /home/stone/soft/backup/python.tar
+
+
+productpage --> details
+            --> reviews --> DB
+                        --> ratings        -->DB
+                        --> configreload 

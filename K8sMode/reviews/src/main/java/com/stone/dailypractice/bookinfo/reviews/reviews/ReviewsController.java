@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.UUID;
 
@@ -48,8 +49,9 @@ public class ReviewsController {
 
 
     @GetMapping(value = "/reviews/{productId}")
-    public ReviewDto getReviewsByProductId(@PathVariable UUID productId) {
+    public ReviewDto getReviewsByProductId(@PathVariable UUID productId, HttpServletRequest request) {
         log.info("getReviewsByProductId by productId:{}", productId);
+        //MiscUtils.showHeaders(request);
         ReviewDto reviewDto = new ReviewDto();
         reviewDto.setProductId(productId);
 

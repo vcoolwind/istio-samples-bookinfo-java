@@ -4,7 +4,7 @@ kubectl delete namespaces  mybookinfo
 kubectl apply -f mybookinfo-k8s.yml
 kubectl apply -f mybookinfo-istio.yml
 
-projects=( ratings configreload reviews details productpage )
+projects=(common ratings configreload reviews details productpage )
 
 for project in "${projects[@]}"
 do

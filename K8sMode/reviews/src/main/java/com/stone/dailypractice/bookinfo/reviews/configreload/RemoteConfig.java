@@ -16,32 +16,11 @@
 
 package com.stone.dailypractice.bookinfo.reviews.configreload;
 
+import lombok.Data;
+
+@Data
 public class RemoteConfig {
 	private int requestThreshold = -1;
+	private String alertLevel = "unknown";
 
-	private String logLevel = "unknown";
-
-	public int getRequestThreshold() {
-		return requestThreshold;
-	}
-
-	public void setRequestThreshold(int requestThreshold) {
-		this.requestThreshold = requestThreshold;
-	}
-
-	public String getLogLevel() {
-		return logLevel;
-	}
-
-	public void setLogLevel(String logLevel) {
-		this.logLevel = logLevel;
-	}
-
-	@Override
-	public String toString() {
-		return "RemoteConfig{" +
-				"requestThreshold=" + requestThreshold +
-				", logLevel='" + logLevel + '\'' +
-				'}';
-	}
 }

@@ -20,7 +20,7 @@ public class ReloadConfigStatus {
     @Autowired
     private MongoDBConfig mongoDBConfig;
 
-    @Scheduled(fixedDelay = 15000)
+    @Scheduled(fixedDelay = 60000)
     public void showConfig() {
         log.info("The value of myConfig is: " + this.dynamicConfig);
         log.info("The value of secretConfig is: " + this.mongoDBConfig);
